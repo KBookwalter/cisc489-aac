@@ -1,2 +1,2 @@
-# cisc489-aac
-Final project for CISC489
+Final Project for CISC 489 - Intro to NLP
+Kevin Bookwalter
