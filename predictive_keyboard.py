@@ -1,5 +1,6 @@
 import re
 from nltk.corpus import words as WORDS
+from tree import NgramTree
 
 class PredictiveKeyboard:
 

@@ -1,5 +1,7 @@
+
 import nltk
 from nltk.corpus import nps_chat
+from nltk.util import ngrams
 from nltk.corpus import words as WORDS
 import sys
 
@@ -55,15 +57,16 @@ def train_unigrams(training_data):
 
     return unigrams
 
-# words = [word.upper() for word in WORDS.words()]
+def dynamic_ngram_helper(data, grams, n):
+    n_grams = list(ngrams(data, n))
+    new_char = n_grams[-1]
+    for n in n_grams:
+        prev = grams
+        for char in n:
+            prev = prev[char]
+        if new_char not in prev:
+            prev[new_char] = {}
+            prev[new_char]['count'] = 0
+        prev[new_char]['count'] += 1
 
-# with open('words.txt', 'w') as f:
-#     original_stdout = sys.stdout
-#     sys.stdout = f
-#     for w in words:
-#         print(w)
-#     sys.stdout = original_stdout
-
-#     for i in range(10):
-#         print(words[i])
 
