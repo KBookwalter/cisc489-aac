@@ -69,69 +69,24 @@ class NgramTree:
             return []
 
 
+    def get_more_predictions(self, pattern, preds):
+        while(len(preds) < 5):
+            pattern = pattern[1:]
+            new_preds = [p.char for p in self.get_children(pattern)]
+            i = 5 - len(preds)
+            for char in new_preds:
+                if char not in preds:
+                    preds.append(char)
+                    i -= 1
+                    if i==0:
+                        break
+        return preds
+
+
     def get_predictions(self, pattern):
         preds = [p.char for p in self.get_children(pattern)]
         if len(preds) >= 5:
             return preds[:5]
         else:
-            i = 5 - len(preds)
-            for char in ['E', 'A', 'R', 'I', 'O']:
-                if char not in preds:
-                    preds.append(char)
-                    i -= 1
-                if i == 0:
-                    return preds
-
-
-            
-
-
-
-# def test():
-#     t = NgramTree('<S>')
-#     all_words = [word.upper() for word in WORDS.words()]
-#     t.add_words(all_words[:1000])
-#     print(t.get_ngram_count('A'))
-#     print(t.get_ngram_count('AB'))
-#     print(t.get_ngram_count('AARDVARK'))
-#     children = t.get_child('A').children
-
-#     pickle.dump(children, open("children.p", "wb"))
-
-#     asdf = pickle.load(open("children.p", "rb"))
-
-#     for c in asdf:
-#         print(c.char, c.count)
-
-# def test2():
-#         t = NgramTree('<S>')
-#         all_words = [word.upper() for word in WORDS.words()]
-#         t.add_words(all_words[:1000])
-#         preds = t.get_predictions('AARDVA')
-#         for p in preds:
-#             print(p)
-
-# def train_ngrams():
-#     t = NgramTree('<S>')
-#     all_words = [word.upper() for word in WORDS.words()]
-#     t.add_words(all_words)
-
-#     pickle.dump(t, open("ngrams.p", "wb"))
-
-# def test3():
-#     t = pickle.load(open("ngrams.p", "rb"))
-#     print(t.get_predictions("KEV"))
-#     print(t.get_predictions("KEV"))
-#     print(t.get_predictions("KEV"))
-#     print(t.get_predictions("KEV"))
-#     print(t.get_predictions("KEV"))
-#     print(t.get_predictions("KEV"))
-
-
-
-# test3()
-
-
-
-
+            return self.get_more_predictions(pattern, preds)
     

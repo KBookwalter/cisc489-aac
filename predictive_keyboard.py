@@ -86,12 +86,7 @@ class PredictiveKeyboard:
         sent = list(sent)
         scan_time = 0
 
-        # i = 0
-        # length = len(sent)
         for char in sent:
-            # i += 1
-            # if(i % 1000 == 0):
-            #     print(i, '/', length)
             char = char.upper()
             if re.match(r'[A-Z]+', char):
                 char_row, char_col = self.get_char_location(char)
@@ -127,20 +122,3 @@ class PredictiveKeyboard:
     def update_dynamic_row(self):
         # print(self.prev)
         self.dynamic_row = self.ngram_tree.get_predictions(self.prev)
-
-
-    
-        
-
-    # def update_prev(self, char):
-    #     if char.isalpha():
-    #         self.prev = char
-    
-    # def update_dynamic_row(self):
-    #     # d.items(), key=lambda x: x[1], reverse=True
-    #     top5 = sorted(self.bigrams[self.prev].items(), key=lambda x: x[1])[:5]
-    #     # print(top5)
-    #     self.dynamic_row = []
-    #     for k,v in top5:
-    #         self.dynamic_row.append(k)
-    #     print(self.dynamic_row)
