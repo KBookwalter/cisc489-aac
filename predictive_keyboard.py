@@ -1,6 +1,6 @@
 import re
-from nltk.corpus import words as WORDS
 from tree import NgramTree
+import pickle
 
 class PredictiveKeyboard:
 
@@ -22,10 +22,9 @@ class PredictiveKeyboard:
         # temporary work around for when no predictions can be made, just use 5 most frequent letters
         self.most_frequent = ['E', 'A', 'R', 'I', 'O']
 
-        self.all_words = [word.upper() for word in WORDS.words()]
-        self.possible_words = self.all_words
-
         self.prev = ''
+
+        self.ngram_tree = pickle.load(open("ngrams.p", "rb"))
 
 
     def print_keyboard(self):
@@ -98,12 +97,10 @@ class PredictiveKeyboard:
                 char_row, char_col = self.get_char_location(char)
                 scan_time = scan_time + char_row + char_col
                 self.update_prev(char)
-                self.update_possible_words()
                 self.update_dynamic_row()
             elif re.match(r' ', char):
                 self.reset_prev()
                 self.reset_dynamic_row()
-                self.reset_words()
 
 
         return scan_time
@@ -127,38 +124,9 @@ class PredictiveKeyboard:
     def reset_dynamic_row(self):
         self.dynamic_row = self.default_row
 
-    def reset_words(self):
-        self.possible_words = self.all_words
-
-    def update_possible_words(self):
-        pattern = r'\b' + self.prev + r'.+'
-        new_words = [word for word in self.possible_words if re.match(pattern, word)]
-        self.possible_words = new_words
-
     def update_dynamic_row(self):
         # print(self.prev)
-        next = {}
-        self.dynamic_row = []
-        for word in self.possible_words:
-            next_char = word[len(self.prev)]
-            if next_char not in next:
-                next[next_char] = 0
-            next[next_char] += 1
-
-        top5 = sorted(next.items(), key=lambda x: x[1], reverse=True)[:5]
-        
-        for k,v in top5:
-            self.dynamic_row.append(k)
-
-        # if dynamic row is not full, fill it with most frequent English characters
-        if len(self.dynamic_row) < 5:
-            i = 5 - len(self.dynamic_row)
-            for char in self.most_frequent:
-                if char not in self.dynamic_row:
-                    self.dynamic_row.append(char)
-                    i -= 1
-                if i == 0:
-                    break
+        self.dynamic_row = self.ngram_tree.get_predictions(self.prev)
 
 
     

@@ -87,49 +87,49 @@ class NgramTree:
 
 
 
-def test():
-    t = NgramTree('<S>')
-    all_words = [word.upper() for word in WORDS.words()]
-    t.add_words(all_words[:1000])
-    print(t.get_ngram_count('A'))
-    print(t.get_ngram_count('AB'))
-    print(t.get_ngram_count('AARDVARK'))
-    children = t.get_child('A').children
+# def test():
+#     t = NgramTree('<S>')
+#     all_words = [word.upper() for word in WORDS.words()]
+#     t.add_words(all_words[:1000])
+#     print(t.get_ngram_count('A'))
+#     print(t.get_ngram_count('AB'))
+#     print(t.get_ngram_count('AARDVARK'))
+#     children = t.get_child('A').children
 
-    pickle.dump(children, open("children.p", "wb"))
+#     pickle.dump(children, open("children.p", "wb"))
 
-    asdf = pickle.load(open("children.p", "rb"))
+#     asdf = pickle.load(open("children.p", "rb"))
 
-    for c in asdf:
-        print(c.char, c.count)
+#     for c in asdf:
+#         print(c.char, c.count)
 
-def test2():
-        t = NgramTree('<S>')
-        all_words = [word.upper() for word in WORDS.words()]
-        t.add_words(all_words[:1000])
-        preds = t.get_predictions('AARDVA')
-        for p in preds:
-            print(p)
+# def test2():
+#         t = NgramTree('<S>')
+#         all_words = [word.upper() for word in WORDS.words()]
+#         t.add_words(all_words[:1000])
+#         preds = t.get_predictions('AARDVA')
+#         for p in preds:
+#             print(p)
 
-def train_ngrams():
-    t = NgramTree('<S>')
-    all_words = [word.upper() for word in WORDS.words()]
-    t.add_words(all_words)
+# def train_ngrams():
+#     t = NgramTree('<S>')
+#     all_words = [word.upper() for word in WORDS.words()]
+#     t.add_words(all_words)
 
-    pickle.dump(t, open("ngrams.p", "wb"))
+#     pickle.dump(t, open("ngrams.p", "wb"))
 
-def test3():
-    t = pickle.load(open("ngrams.p", "rb"))
-    print(t.get_predictions("KEV"))
-    print(t.get_predictions("KEV"))
-    print(t.get_predictions("KEV"))
-    print(t.get_predictions("KEV"))
-    print(t.get_predictions("KEV"))
-    print(t.get_predictions("KEV"))
+# def test3():
+#     t = pickle.load(open("ngrams.p", "rb"))
+#     print(t.get_predictions("KEV"))
+#     print(t.get_predictions("KEV"))
+#     print(t.get_predictions("KEV"))
+#     print(t.get_predictions("KEV"))
+#     print(t.get_predictions("KEV"))
+#     print(t.get_predictions("KEV"))
 
 
 
-test3()
+# test3()
 
 
 
