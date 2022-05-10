@@ -19,12 +19,9 @@ class PredictiveKeyboard:
         # use this for starting a new word
         self.default_row = ['T', 'B', 'O', 'A', 'I']
 
-        # temporary work around for when no predictions can be made, just use 5 most frequent letters
-        self.most_frequent = ['E', 'A', 'R', 'I', 'O']
-
         self.prev = ''
 
-        self.ngram_tree = pickle.load(open("ngrams.p", "rb"))
+        self.character_ngram_tree = pickle.load(open("character_ngram_tree.p", "rb"))
 
 
     def print_keyboard(self):
@@ -121,4 +118,4 @@ class PredictiveKeyboard:
 
     def update_dynamic_row(self):
         # print(self.prev)
-        self.dynamic_row = self.ngram_tree.get_predictions(self.prev)
+        self.dynamic_row = self.character_ngram_tree.get_predictions(self.prev)
