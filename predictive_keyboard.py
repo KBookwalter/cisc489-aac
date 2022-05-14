@@ -1,4 +1,7 @@
+from email.policy import default
 import re
+
+from torch import default_generator
 from tree import NgramTree
 import pickle
 
@@ -12,12 +15,12 @@ class PredictiveKeyboard:
                             ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
                             ['&', '@', '\'', '%', '/', '[', ']', '{', '}', '#'] ]
 
-        # first letters of 5 most frequent English words with unique first characters
-        # 'the', 'be', 'of', 'and', 'in'
-        self.dynamic_row = ['T', 'B', 'O', 'A', 'I']
 
         # use this for starting a new word
+        # first letters of 5 most common words with unique starting characters
         self.default_row = ['T', 'B', 'O', 'A', 'I']
+        
+        self.dynamic_row = self.default_row
 
         self.prev = ''
 
