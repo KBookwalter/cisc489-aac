@@ -4,6 +4,7 @@ import re
 from torch import default_generator
 from tree import NgramTree
 import pickle
+import csv
 
 class PredictiveKeyboard:
 
@@ -25,6 +26,21 @@ class PredictiveKeyboard:
         self.prev = ''
 
         self.character_ngram_tree = pickle.load(open("character_ngram_tree.p", "rb"))
+
+        self.word_ranks = self.init_word_ranks()
+
+        self.word_predictions_default = ['THE', 'OF', 'AND', 'TO', 'A']
+
+        self.word_predictions_row = self.word_predictions_default
+
+    def init_word_ranks(self):
+        file = open('unigram_freq.csv')
+        csvreader = csv.reader(file)
+        header = next(csvreader)
+        word_ranks = {}
+        for row in csvreader:
+            word_ranks[row[0]] = row[1]
+        return word_ranks
 
 
     def print_keyboard(self):
@@ -88,23 +104,50 @@ class PredictiveKeyboard:
 
         for char in sent:
             char = char.upper()
+            char_row, char_col = self.get_char_location(char)
+            scan_time = scan_time + char_row + char_col
             if re.match(r'[A-Z]+', char):
-                char_row, char_col = self.get_char_location(char)
-                scan_time = scan_time + char_row + char_col
                 self.update_prev(char)
                 self.update_dynamic_row()
             elif re.match(r' ', char):
                 self.reset_prev()
                 self.reset_dynamic_row()
 
+        return scan_time
+
+    def type_sentence_dynamic_with_word_predictions(self, sent):
+        words = sent.split(" ")
+        next_word = words[0]
+        sent = list(sent)
+        scan_time = 0
+
+        for char in sent:
+            if next_word in self.word_predictions_row:
+                row = 1
+                col = self.word_predictions_row.index(next_word) + 1
+                scan_time += row + col
+
+            char = char.upper()
+            char_row, char_col = self.get_char_location(char)
+            scan_time = scan_time + char_row + char_col
+            if re.match(r'[A-Z]+', char):
+                self.update_prev(char)
+                self.update_dynamic_row()
+                self.update_word_predictions
+            elif re.match(r' ', char):
+                self.reset_prev()
+                self.reset_dynamic_row()
+                self.reset_word_predictions
 
         return scan_time
+
 
     def type_sentence_static(self, sent):
         sent = list(sent)
         scan_time = 0
 
         for char in sent:
+            char = char.upper()
             char_row, char_col = self.get_static_char_location(char)
             scan_time = scan_time + char_row + char_col
 
@@ -120,5 +163,34 @@ class PredictiveKeyboard:
         self.dynamic_row = self.default_row
 
     def update_dynamic_row(self):
-        # print(self.prev)
         self.dynamic_row = self.character_ngram_tree.get_predictions(self.prev)
+
+    def reset_word_predictions(self):
+        self.word_predictions_row = self.word_predictions_default
+
+    def get_more_word_predictions(self, preds):
+        i = 5 - len(preds)
+        for word in self.word_predictions_default:
+            if word not in preds:
+                preds.append(word)
+                i -= 1
+                if i== 0:
+                    break
+
+        return preds
+
+
+    def update_word_predictions(self):
+        if self.character_ngram_tree.get_ngram_count(self.prev) > 0:
+            all_preds = self.character_ngram_tree.get_word_predictions(self.prev)
+            sorted_pred_ranks = [(word, self.word_ranks[word]) for word in all_preds].sort(key = lambda x: x[1])
+            if len(sorted_pred_ranks >= 5):
+                new_preds = [pred[1] for pred in sorted_pred_ranks[:5]]
+            else:
+                new_preds = [pred[1] for pred in sorted_pred_ranks]
+                new_preds = self.get_more_word_predictions(new_preds)
+        else:
+            new_preds = self.word_predictions_default
+
+        self.word_predictions_row = new_preds
+        return new_preds

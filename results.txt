@@ -1,77 +1,17 @@
 
 ==================================================================
 
-Typing bible-kjv
-
-Static Scans:  27738399
-Time taken:  7.181030750274658 seconds
-
-
-Dynamic Scans:  16097756
-Time taken:  56.31864809989929 seconds
-
-
-Difference (scans):  41.96580703882729 % faster
-
-
-==================================================================
-
-Typing carroll-alice
-
-Static Scans:  923849
-Time taken:  0.2292318344116211 seconds
-
-
-Dynamic Scans:  536409
-Time taken:  1.9603888988494873 seconds
-
-
-Difference (scans):  41.93758936795948 % faster
-
-
-==================================================================
-
-Typing melville-moby_dick
-
-Static Scans:  7926708
-Time taken:  1.9968352317810059 seconds
-
-
-Dynamic Scans:  4599258
-Time taken:  20.794237852096558 seconds
-
-
-Difference (scans):  41.97770373274757 % faster
-
-
-==================================================================
-
-Typing austen-sense
-
-Static Scans:  4358618
-Time taken:  1.0729310512542725 seconds
-
-
-Dynamic Scans:  2518466
-Time taken:  11.432369947433472 seconds
-
-
-Difference (scans):  42.21870326787069 % faster
-
-
-==================================================================
-
 Typing switchboard
 
 Static Scans:  2184074
-Time taken:  0.5548751354217529 seconds
+Time taken:  0.6358699798583984 seconds
 
 
-Dynamic Scans:  1276994
-Time taken:  3.685537099838257 seconds
+Dynamic Scans:  1653346
+Time taken:  5.078048944473267 seconds
 
 
-Difference (scans):  41.53155982810106 % faster
+Difference (scans):  24.29990925215904 % faster
 
 
 ==================================================================
@@ -79,14 +19,14 @@ Difference (scans):  41.53155982810106 % faster
 Typing overheard
 
 Static Scans:  4498803
-Time taken:  1.108793020248413 seconds
+Time taken:  1.2350149154663086 seconds
 
 
-Dynamic Scans:  2676275
-Time taken:  7.832810878753662 seconds
+Dynamic Scans:  3355075
+Time taken:  10.61923885345459 seconds
 
 
-Difference (scans):  40.511398254157825 % faster
+Difference (scans):  25.42294027989223 % faster
 
 
 ==================================================================
@@ -94,17 +34,17 @@ Difference (scans):  40.511398254157825 % faster
 Typing test file
 
 Static Scans:  16122
-Time taken:  0.004617929458618164 seconds
+Time taken:  0.005449056625366211 seconds
 
 
-Dynamic Scans:  8680
-Time taken:  0.038229942321777344 seconds
+Dynamic Scans:  10308
+Time taken:  0.051850080490112305 seconds
 
 
-Difference (scans):  46.16052598933135 % faster
+Difference (scans):  36.06252326014142 % faster
 
 
 ==================================================================
 
-Total Difference (scans):  41.834561742772145 % faster
+Total Difference (scans):  25.082404102463666 % faster
 

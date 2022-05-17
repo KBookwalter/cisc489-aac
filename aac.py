@@ -15,9 +15,9 @@ def main():
     original_stdout = sys.stdout
     with open("results.txt", "w") as f:
         sys.stdout = f
-        s, d = run_gutenberg(kb)
-        static_scans += s
-        dynamic_scans += d
+        # s, d = run_gutenberg(kb)
+        # static_scans += s
+        # dynamic_scans += d
 
         s, d = run_switchboard(kb)
         static_scans += s
