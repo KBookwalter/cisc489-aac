@@ -1,14 +1,74 @@
 
 ==================================================================
 
+Typing bible-kjv
+
+Static Scans:  27738399
+Time taken:  7.586421966552734 seconds
+
+
+Dynamic Scans:  20348658
+Time taken:  62.40571713447571 seconds
+
+
+Difference (scans):  26.640834606207807 % faster
+
+
+==================================================================
+
+Typing carroll-alice
+
+Static Scans:  923849
+Time taken:  0.24372410774230957 seconds
+
+
+Dynamic Scans:  674799
+Time taken:  2.1505558490753174 seconds
+
+
+Difference (scans):  26.957868656024957 % faster
+
+
+==================================================================
+
+Typing melville-moby_dick
+
+Static Scans:  7926708
+Time taken:  2.1073098182678223 seconds
+
+
+Dynamic Scans:  5510728
+Time taken:  22.541321992874146 seconds
+
+
+Difference (scans):  30.478983204629213 % faster
+
+
+==================================================================
+
+Typing austen-sense
+
+Static Scans:  4358618
+Time taken:  1.1509382724761963 seconds
+
+
+Dynamic Scans:  3006122
+Time taken:  12.357216835021973 seconds
+
+
+Difference (scans):  31.03038623710543 % faster
+
+
+==================================================================
+
 Typing switchboard
 
 Static Scans:  2184074
-Time taken:  0.6358699798583984 seconds
+Time taken:  0.5928759574890137 seconds
 
 
 Dynamic Scans:  1653346
-Time taken:  5.078048944473267 seconds
+Time taken:  4.174392938613892 seconds
 
 
 Difference (scans):  24.29990925215904 % faster
@@ -19,11 +79,11 @@ Difference (scans):  24.29990925215904 % faster
 Typing overheard
 
 Static Scans:  4498803
-Time taken:  1.2350149154663086 seconds
+Time taken:  1.2001657485961914 seconds
 
 
 Dynamic Scans:  3355075
-Time taken:  10.61923885345459 seconds
+Time taken:  9.179431915283203 seconds
 
 
 Difference (scans):  25.42294027989223 % faster
@@ -34,11 +94,11 @@ Difference (scans):  25.42294027989223 % faster
 Typing test file
 
 Static Scans:  16122
-Time taken:  0.005449056625366211 seconds
+Time taken:  0.0052947998046875 seconds
 
 
 Dynamic Scans:  10308
-Time taken:  0.051850080490112305 seconds
+Time taken:  0.05146503448486328 seconds
 
 
 Difference (scans):  36.06252326014142 % faster
@@ -46,5 +106,5 @@ Difference (scans):  36.06252326014142 % faster
 
 ==================================================================
 
-Total Difference (scans):  25.082404102463666 % faster
+Total Difference (scans):  27.467950318273676 % faster
 
