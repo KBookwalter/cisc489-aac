@@ -11,29 +11,38 @@ def main():
 
     static_scans = 0
     dynamic_scans = 0
+    dynamic_scans_with_word_preds = 0
 
     original_stdout = sys.stdout
     with open("results.txt", "w") as f:
         sys.stdout = f
-        # s, d = run_gutenberg(kb)
+        # s, d, w= run_gutenberg(kb)
         # static_scans += s
         # dynamic_scans += d
+        # dynamic_scans_with_word_preds += w
 
-        s, d = run_switchboard(kb)
+        s, d, w = run_switchboard(kb)
         static_scans += s
         dynamic_scans += d
+        dynamic_scans_with_word_preds += w
 
-        s, d = run_overheard(kb)
+        s, d, w = run_overheard(kb)
         static_scans += s
         dynamic_scans += d
+        dynamic_scans_with_word_preds += w
 
-        s, d = run_test_file(kb)
+        s, d, w= run_test_file(kb)
         static_scans += s
         dynamic_scans += d
+        dynamic_scans_with_word_preds += w
 
-        diff = (static_scans - dynamic_scans) / static_scans
+        dynamic_diff = (static_scans - dynamic_scans) / static_scans
         print("\n==================================================================\n")
-        print("Total Difference (scans): ", diff * 100, "% faster\n")
+        print("Total Difference Dynamic: ", dynamic_diff * 100, "% faster\n")
+
+        word_pred_diff = (static_scans - dynamic_scans_with_word_preds) / static_scans
+        print("\n==================================================================\n")
+        print("Total Difference Dynamic with Word Predictions: ", word_pred_diff * 100, "% faster\n")
     
     sys.stdout = original_stdout
 
@@ -55,32 +64,36 @@ def run_gutenberg(kb):
 def run_switchboard(kb):
     static_scans = 0
     dynamic_scans = 0
+    word_pred_scans = 0
 
     sb_words = prep_switchboard()
-    s, d = run_test(kb, sb_words, "switchboard")
+    s, d, w = run_test(kb, sb_words, "switchboard")
 
     static_scans += s
     dynamic_scans += d
+    word_pred_scans += w
 
-    return static_scans, dynamic_scans
+    return static_scans, dynamic_scans, word_pred_scans
 
 def run_overheard(kb):
     static_scans = 0
     dynamic_scans = 0
+    word_pred_scans = 0
 
     overheard = prep_overheard()
-    s, d = run_test(kb, overheard, "overheard")
+    s, d, w = run_test(kb, overheard, "overheard")
 
     static_scans += s
     dynamic_scans += d
+    word_pred_scans += w
 
-    return static_scans, dynamic_scans
+    return static_scans, dynamic_scans, word_pred_scans
 
 def run_test_file(kb):
     test_file = open("testfile.txt", "r", encoding="utf-8")
     text = test_file.read()
-    s,d = run_test(kb, text, "test file")
-    return s,d
+    s,d,w = run_test(kb, text, "test file")
+    return s,d,w
 
     
 
@@ -102,10 +115,20 @@ def run_test(kb, data, title):
     print("Time taken: ", time_end - time_start, "seconds")
     print("\n")
 
-    diff = (static_scans - dynamic_scans) / static_scans
-    print("Difference (scans): ", diff * 100, "% faster\n")
+    time_start = time()
+    word_pred_scans = kb.type_sentence_dynamic_with_word_predictions(data.upper())
+    time_end = time()
+    print("Dynamic Scans with Word Predictions: ", word_pred_scans)
+    print("Time taken: ", time_end - time_start, "seconds")
+    print("\n")
 
-    return static_scans, dynamic_scans
+    dynamic_diff = (static_scans - dynamic_scans) / static_scans
+    print("Dynamic Scanning: ", dynamic_diff * 100, "% faster\n")
+
+    word_diff = (static_scans - word_pred_scans) / static_scans
+    print("Dynamic Scanning with Word Prediction: ", word_diff * 100, "% faster\n")
+
+    return static_scans, dynamic_scans, word_pred_scans
 
 def prep_gutenberg(title):
     text = gutenberg.raw(title + '.txt')

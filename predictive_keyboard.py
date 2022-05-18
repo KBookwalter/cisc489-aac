@@ -116,28 +116,43 @@ class PredictiveKeyboard:
         return scan_time
 
     def type_sentence_dynamic_with_word_predictions(self, sent):
-        words = sent.split(" ")
+        sent_original = sent
+        words = sent.upper().split(" ")
         next_word = words[0]
-        sent = list(sent)
+        sent = list(sent.upper())
         scan_time = 0
+        i = 0
 
-        for char in sent:
+        while i < len(sent):
+            char = sent[i]
+
             if next_word in self.word_predictions_row:
-                row = 1
+                row = 7
                 col = self.word_predictions_row.index(next_word) + 1
                 scan_time += row + col
-
-            char = char.upper()
-            char_row, char_col = self.get_char_location(char)
-            scan_time = scan_time + char_row + char_col
-            if re.match(r'[A-Z]+', char):
-                self.update_prev(char)
-                self.update_dynamic_row()
-                self.update_word_predictions
-            elif re.match(r' ', char):
                 self.reset_prev()
                 self.reset_dynamic_row()
                 self.reset_word_predictions
+                words = words[1:]
+                next_word = words[0]
+                i = sent_original.index(next_word, i) - 1      
+            else:
+                char = char.upper()
+                char_row, char_col = self.get_char_location(char)
+                # char_row += 1 # account for extra row at top
+                scan_time = scan_time + char_row + char_col
+                if re.match(r'[A-Z]+', char):
+                    self.update_prev(char)
+                    self.update_dynamic_row()
+                    self.update_word_predictions
+                elif re.match(r' ', char):
+                    self.reset_prev()
+                    self.reset_dynamic_row()
+                    self.reset_word_predictions
+                    words = words[1:]
+                    next_word = words[0]
+
+            i += 1
 
         return scan_time
 

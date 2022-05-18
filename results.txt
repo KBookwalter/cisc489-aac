@@ -4,14 +4,20 @@
 Typing switchboard
 
 Static Scans:  2184074
-Time taken:  0.6358699798583984 seconds
+Time taken:  0.6068038940429688 seconds
 
 
 Dynamic Scans:  1653346
-Time taken:  5.078048944473267 seconds
+Time taken:  4.477333068847656 seconds
 
 
-Difference (scans):  24.29990925215904 % faster
+Dynamic Scans with Word Predictions:  1632567
+Time taken:  40.15957283973694 seconds
+
+
+Dynamic Scanning:  24.29990925215904 % faster
+
+Dynamic Scanning with Word Prediction:  25.2512964304323 % faster
 
 
 ==================================================================
@@ -19,14 +25,20 @@ Difference (scans):  24.29990925215904 % faster
 Typing overheard
 
 Static Scans:  4498803
-Time taken:  1.2350149154663086 seconds
+Time taken:  1.2026617527008057 seconds
 
 
 Dynamic Scans:  3355075
-Time taken:  10.61923885345459 seconds
+Time taken:  8.74391484260559 seconds
 
 
-Difference (scans):  25.42294027989223 % faster
+Dynamic Scans with Word Predictions:  3324835
+Time taken:  166.2475929260254 seconds
+
+
+Dynamic Scanning:  25.42294027989223 % faster
+
+Dynamic Scanning with Word Prediction:  26.09511907945291 % faster
 
 
 ==================================================================
@@ -34,17 +46,28 @@ Difference (scans):  25.42294027989223 % faster
 Typing test file
 
 Static Scans:  16122
-Time taken:  0.005449056625366211 seconds
+Time taken:  0.0046846866607666016 seconds
 
 
 Dynamic Scans:  10308
-Time taken:  0.051850080490112305 seconds
+Time taken:  0.04920601844787598 seconds
 
 
-Difference (scans):  36.06252326014142 % faster
+Dynamic Scans with Word Predictions:  10078
+Time taken:  0.045423030853271484 seconds
+
+
+Dynamic Scanning:  36.06252326014142 % faster
+
+Dynamic Scanning with Word Prediction:  37.48914526733656 % faster
 
 
 ==================================================================
 
-Total Difference (scans):  25.082404102463666 % faster
+Total Difference Dynamic:  25.082404102463666 % faster
+
+
+==================================================================
+
+Total Difference Dynamic with Word Predictions:  25.847428847205382 % faster
 
