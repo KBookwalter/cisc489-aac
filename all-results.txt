@@ -1,0 +1,110 @@
+
+==================================================================
+
+Typing bible-kjv
+
+Static Scans:  27738399
+Time taken:  8.671859979629517 seconds
+
+
+Dynamic Scans:  20348658
+Time taken:  64.16991996765137 seconds
+
+
+Difference (scans):  26.640834606207807 % faster
+
+
+==================================================================
+
+Typing carroll-alice
+
+Static Scans:  923849
+Time taken:  0.24310088157653809 seconds
+
+
+Dynamic Scans:  674799
+Time taken:  2.0637848377227783 seconds
+
+
+Difference (scans):  26.957868656024957 % faster
+
+
+==================================================================
+
+Typing melville-moby_dick
+
+Static Scans:  7926708
+Time taken:  2.0635437965393066 seconds
+
+
+Dynamic Scans:  5510728
+Time taken:  22.78583812713623 seconds
+
+
+Difference (scans):  30.478983204629213 % faster
+
+
+==================================================================
+
+Typing austen-sense
+
+Static Scans:  4358618
+Time taken:  1.110694169998169 seconds
+
+
+Dynamic Scans:  3006122
+Time taken:  13.888468027114868 seconds
+
+
+Difference (scans):  31.03038623710543 % faster
+
+
+==================================================================
+
+Typing switchboard
+
+Static Scans:  2184074
+Time taken:  0.5770339965820312 seconds
+
+
+Dynamic Scans:  1653346
+Time taken:  4.320745944976807 seconds
+
+
+Difference (scans):  24.29990925215904 % faster
+
+
+==================================================================
+
+Typing overheard
+
+Static Scans:  4498803
+Time taken:  1.2030138969421387 seconds
+
+
+Dynamic Scans:  3355075
+Time taken:  9.061997890472412 seconds
+
+
+Difference (scans):  25.42294027989223 % faster
+
+
+==================================================================
+
+Typing test file
+
+Static Scans:  16122
+Time taken:  0.0054988861083984375 seconds
+
+
+Dynamic Scans:  10308
+Time taken:  0.04724001884460449 seconds
+
+
+Difference (scans):  36.06252326014142 % faster
+
+
+==================================================================
+
+Total Difference (scans):  27.467950318273676 % faster
+

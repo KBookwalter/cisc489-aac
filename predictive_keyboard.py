@@ -27,13 +27,15 @@ class PredictiveKeyboard:
 
         self.character_ngram_tree = pickle.load(open("character_ngram_tree.p", "rb"))
 
+    # prints the entire keyboard, including the dynamic row
     def print_keyboard(self):
         print(self.dynamic_row)
         for row in self.static_keyboard:
             print(row)
 
-
-    # add to this method a way to handle characters not in keyboard
+    # gets coordinames (row, column) of a character on the static keyboard
+    # returns a tuple (row, column) if character is in keyboard, (0, 0)
+    # otherwise to ignore characters that can't be typed
     def get_static_char_location(self, char):
         found = False
         char = char.upper()
@@ -58,6 +60,9 @@ class PredictiveKeyboard:
         else:
             return 0, 0
 
+    # gets a character's location on the dynamic keyboard.
+    # returns tuple (col, row) if character is on keyboard,
+    # (0, 0) otherwise
     def get_char_location(self, char):
         in_dynamic = False
         char = char.upper()
@@ -82,11 +87,15 @@ class PredictiveKeyboard:
         # character isn't in the keyboard
         return char_row, char_col
 
+    # Calculates and returns scans taken to type an input
+    # with the dynamic keyboard.
     def type_sentence_dynamic(self, sent):
+        outfile = open('predictions.txt', 'w') # this line can be commented out if you don't need predictions written to a file
         sent = list(sent)
         scan_time = 0
 
         for char in sent:
+            outfile.write(self.get_dynamic_row_string() + '\n') # this line can be commented out if you don't need predictions written to a file
             char = char.upper()
             char_row, char_col = self.get_char_location(char)
             scan_time = scan_time + char_row + char_col
@@ -99,6 +108,8 @@ class PredictiveKeyboard:
 
         return scan_time
 
+    # Calculates and returns scans taken to type an input
+    # with the static keyboard
     def type_sentence_static(self, sent):
         sent = list(sent)
         scan_time = 0
@@ -110,14 +121,26 @@ class PredictiveKeyboard:
 
         return scan_time
 
+    # Adds last character to previous characters
     def update_prev(self, char):
         self.prev = self.prev + char
 
+    # Reset previous characters
     def reset_prev(self):
         self.prev = ''
 
+    # Reset dynamic row to default
     def reset_dynamic_row(self):
         self.dynamic_row = self.default_row
 
+    # Gets new character predictions and updates dynamic row
     def update_dynamic_row(self):
         self.dynamic_row = self.character_ngram_tree.get_predictions(self.prev)
+
+    # Returns the dynamic row as a string
+    def get_dynamic_row_string(self):
+        dynamic_row_string = ""
+        for char in self.dynamic_row:
+            dynamic_row_string += char
+        
+        return dynamic_row_string

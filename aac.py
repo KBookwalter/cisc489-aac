@@ -15,17 +15,21 @@ def main():
     original_stdout = sys.stdout
     with open("results.txt", "w") as f:
         sys.stdout = f
-        s, d = run_gutenberg(kb)
-        static_scans += s
-        dynamic_scans += d
 
-        s, d = run_switchboard(kb)
-        static_scans += s
-        dynamic_scans += d
+        # 3 additional tests are commented out here. They have to be commented out
+        # for a run where you're using the perl script to check results
 
-        s, d = run_overheard(kb)
-        static_scans += s
-        dynamic_scans += d
+        # s, d = run_gutenberg(kb)
+        # static_scans += s
+        # dynamic_scans += d
+
+        # s, d = run_switchboard(kb)
+        # static_scans += s
+        # dynamic_scans += d
+
+        # s, d = run_overheard(kb)
+        # static_scans += s
+        # dynamic_scans += d
 
         s, d = run_test_file(kb)
         static_scans += s
@@ -37,11 +41,12 @@ def main():
     
     sys.stdout = original_stdout
 
-
+# Runs test on a list of files in NLTK Gutenberg corpus
 def run_gutenberg(kb):
     static_scans = 0
     dynamic_scans = 0
 
+    # List of file names
     gutenberg_texts = ["bible-kjv", "carroll-alice", "melville-moby_dick", "austen-sense"]
 
     for title in gutenberg_texts:
@@ -52,6 +57,7 @@ def run_gutenberg(kb):
 
     return static_scans, dynamic_scans
 
+# runs test on switchboard.txt
 def run_switchboard(kb):
     static_scans = 0
     dynamic_scans = 0
@@ -64,6 +70,7 @@ def run_switchboard(kb):
 
     return static_scans, dynamic_scans
 
+# runs test on overheard.txt
 def run_overheard(kb):
     static_scans = 0
     dynamic_scans = 0
@@ -76,14 +83,14 @@ def run_overheard(kb):
 
     return static_scans, dynamic_scans
 
+# Runs test on testfile.txt
 def run_test_file(kb):
     test_file = open("testfile.txt", "r", encoding="utf-8")
     text = test_file.read()
     s,d = run_test(kb, text, "test file")
     return s,d
 
-    
-
+# Runs static typing and dynamic typing on a data file and prints results
 def run_test(kb, data, title):
     print("\n==================================================================\n")
     print("Typing " + title)
@@ -107,12 +114,14 @@ def run_test(kb, data, title):
 
     return static_scans, dynamic_scans
 
+# Preps files in the NLTK Gutenberg corpus by putting text into a string
 def prep_gutenberg(title):
     text = gutenberg.raw(title + '.txt')
     text.replace("  ", " ")
     text.replace("\n", " ")
     return text.upper()
 
+# Prep switchboard.txt data file by putting text into a string
 def prep_switchboard():
     words = switchboard.words()
     words_str = ""
@@ -120,6 +129,7 @@ def prep_switchboard():
         words_str += word + " "
     return words_str
 
+# Prep overheard.txt data file by putting text into a string
 def prep_overheard():
     file = open('overheard.txt', 'r', encoding='utf-8')
     lines_raw = file.readlines()
