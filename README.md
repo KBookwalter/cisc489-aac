@@ -1,6 +1,8 @@
 Final Project for CISC 489 - Intro to NLP
 Kevin Bookwalter
 
+https://github.com/KBookwalter/cisc489-aac
+
 RUNNING THE PROGRAM:
 
     The setup of this program is a bit confusing because I had to adjust things to get it to work
@@ -108,7 +110,18 @@ FILE DESCRIPTIONS (Data Files):
 
     
 OTHER BRANCHES:
-    The work 
+    I didn't have time to finish my work on the 'word-predictions' branch, but I made
+    some progress on word predictions. I have new methods in tree.py and predictive_keyboard.py
+    to predict possible words by searching through an ngram tree based on previous characters
+    and add these to a row in the predictive keyboard. This was slower than the regular dynamic
+    keyboard if this new row was added to the top, and only about 1% faster if it was added
+    to the bottom. I think it's worth looking at if you're interested but it wasn't ready to be
+    merged into main and be part of my submission. The GitHub link for this project is at the 
+    top of the README and you can find the branch there.
 
-333,333 word data set:
+DATA SOURCES
+
+- 333,333 word data set:
     https://www.kaggle.com/datasets/rtatman/english-word-frequency?resource=download
+
+- NLTK Python library / data

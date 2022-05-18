@@ -4,6 +4,7 @@ from nltk.util import ngrams
 import pickle
 import csv
 
+# old training method
 def train_character_tree_nltk_words():
     t = NgramTree('<S>')
     all_words = [word.upper() for word in WORDS.words()]
